@@ -6,8 +6,8 @@ export interface ILoadingComponentProps {
   size?: string;
 }
 
-const loading = (SpinnerComponent: React.ComponentType<ILoadingComponentProps>) => {
-  return <P extends ILoadingComponentProps>(Component: React.ComponentType<P>): React.ComponentType<P> => {
+const loading = <P extends ILoadingComponentProps>(SpinnerComponent: React.ComponentType<ILoadingComponentProps>) => {
+  return (Component: React.ComponentType<P>): React.ComponentType<P> => {
 
     return class extends React.Component<P, {}> {
       public render() {
