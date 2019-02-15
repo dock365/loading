@@ -4,6 +4,7 @@ export interface ILoadingComponentProps {
   loading?: boolean;
   label?: string;
   size?: string;
+  positionRelative?: boolean;
 }
 
 const loading = <P extends ILoadingComponentProps>(SpinnerComponent: React.ComponentType<ILoadingComponentProps>) => {
@@ -13,7 +14,7 @@ const loading = <P extends ILoadingComponentProps>(SpinnerComponent: React.Compo
       public render() {
         if (this.props.loading) {
           return (
-            <div>
+            <div style={this.props.positionRelative && { position: "relative" }}>
               <SpinnerComponent />
               <Component {...this.props} />
             </div>
