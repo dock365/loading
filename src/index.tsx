@@ -1,13 +1,13 @@
 import * as React from "react";
 
-export interface ISpinnerComponentProps {
+export interface ILoadingComponentProps {
   loading?: boolean;
   label?: string;
   size?: string;
 }
 
-const loading = (SpinnerComponent: React.ComponentType<ISpinnerComponentProps>) => {
-  return <P extends ISpinnerComponentProps>(Component: React.ComponentType<P>): React.ComponentType<P> => {
+const loading = (SpinnerComponent: React.ComponentType<ILoadingComponentProps>) => {
+  return <P extends ILoadingComponentProps>(Component: React.ComponentType<P>): React.ComponentType<P> => {
 
     return class extends React.Component<P, {}> {
       public render() {
