@@ -8,9 +8,8 @@ export interface ISpinnerComponentProps {
 
 const loading = (SpinnerComponent: React.ComponentType<ISpinnerComponentProps>) => {
   return <P extends ISpinnerComponentProps>(Component: React.ComponentType<P>): React.ComponentType<P> => {
-    type ComponentPropsType = P & ISpinnerComponentProps;
 
-    return class extends React.Component<ComponentPropsType, {}> {
+    return class extends React.Component<P, {}> {
       public render() {
         if (this.props.loading) {
           return (
