@@ -6,8 +6,8 @@ export interface ISpinnerComponentProps {
   size?: string;
 }
 
-const loading = <P extends ISpinnerComponentProps>(SpinnerComponent: React.ComponentType<ISpinnerComponentProps>) => {
-  return <P extends ISpinnerComponentProps>(Component: React.ComponentType<P>) => {
+const loading = (SpinnerComponent: React.ComponentType<ISpinnerComponentProps>) => {
+  return <P extends ISpinnerComponentProps>(Component: React.ComponentType<P>): React.ComponentType<P> => {
     type ComponentPropsType = P & ISpinnerComponentProps;
 
     return class extends React.Component<ComponentPropsType, {}> {
