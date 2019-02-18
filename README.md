@@ -1,61 +1,56 @@
-# React Confirm
-<!-- [![Build Status](https://travis-ci.org/codedock365/reconfirm.svg?branch=master)](https://travis-ci.org/codedock365/reconfirm) -->
-[![npm Version](https://img.shields.io/npm/v/@dock365/reconfirm.svg)](https://www.npmjs.com/package/@dock365/reconfirm)
+# Loading HOC
+<!-- [![Build Status](https://travis-ci.org/codedock365/loading.svg?branch=master)](https://travis-ci.org/codedock365/loading) -->
+[![npm Version](https://img.shields.io/npm/v/@dock365/loading.svg)](https://www.npmjs.com/package/@dock365/loading)
 
 
 ## Install
 1 Install react confirm as dependency
   ```bash
   # Using yarn package manager
-  $ yarn add @dock365/reconfirm
+  $ yarn add @dock365/loading
 
   # Using npm package manager
-  $ npm install --save @dock365/reconfirm
+  $ npm install --save @dock365/loading
   ```
 2 Import React confirm module
   ```javascript
   // ES6
-  import Confirm from "@dock365/reconfirm"
+  import loading from "@dock365/loading"
 
   // ES5
-  var Confirm = require("@dock365/reconfirm");
+  var loading = require("@dock365/loading");
   ```
 ## Example
 
-#### [CodeSandbox Example Link](https://codesandbox.io/s/r46rpnw49m)
+#### [CodeSandbox Example Link](https://codesandbox.io/s/k9k0kojn83)
 ```javascript
   import React from "react";
   import ReactDOM from "react-dom";
-  import confirm from "@dock365/reconfirm";
+  import loading from "@dock365/loading";
 
-  function Component(props) {
+
+  function Comp(props) {
     return (
       <div className="App">
         <button
-          onClick={() =>
-            props.confirm("Dialog Message", "Dialog Title", "Some Data", data => {
-              alert(data + " Confirmed");
-            })
-          }
+          onClick={() => {
+            props.toggleLoading();
+            setTimeout(() => {
+              props.toggleLoading();
+            }, 2000);
+          }}
         >
-          Show Confirm
+          Do Action
         </button>
       </div>
     );
   }
 
-  function Dialog(props) {
-    return (
-      <div className="App">
-        <h1>{props.title}</h1>
-        <h2>{props.message}</h2>
-        <button onClick={props.onConfirm}>Confirm</button>
-        <button onClick={props.onCancel}>Cancel</button>
-      </div>
-    );
+  function LoadingMessage(props) {
+    return <div className="App">Loading...</div>;
   }
 
-  const App = confirm(Dialog)(Component);
+  const App = loading(LoadingMessage, {})(Comp);
   const rootElement = document.getElementById("root");
   ReactDOM.render(<App />, rootElement);
 ```
@@ -64,18 +59,27 @@
 ### Component Props
 | Name               | Type   | Description                                                          |
 | :----------------- | :----- | :----------------- | :------------------------------------------------------------------- |
-| confirm | (message?: string, title?: string, data?: any, onConfirmAction?: Function) => void | This is the function to invoke confirm dialog, *onConfirmAction* is callback function that will trigger with *data* as parameter when confirmed |
-| confirmed | boolean | Here we can access confirm dialog status, whether confirmed or not |
-| confirmData | any | Here we can access confirm data provided in *onConfirmAction* |
+| toggleLoading | (status?: boolean, relative?: boolean, label?: string, size?: any) => void | This is the function to invoke loading component, *status* is to optionally set status, loading or not. *relative* position of wrapping component. *label* loading message/label. *size* for adjusting loading spinner size.
+|
 
-### Confirm Dialog Props
+
+### Loading component Props
 | Name               | Type   | Description                                                          |
 | :----------------- | :----- | :----------------- | :------------------------------------------------------------------- |
-| onConfirm | Function | Have to invoke *onConfirm* when the confirm button is pressed / clicked. |
-| onCancel | Function | Have to invoke *onCancel* when the cancel button is pressed / clicked. |
-| title | string | Here we can access *title* provided in *onConfirmAction* |
-| message | string | Here we can access *message* provided in *onConfirmAction* |
-| data | any | Here we can access *data* provided in *onConfirmAction* |
+| label | string | Label to display on loading component |
+| size | any | size to adjust spinner or any loading element |
+
+### HOC Properties
+
+```javascript
+loading(LoadingComponent, { label, size, positionRelative })(Component)
+```
+
+| Name               | Type   | Description                                                          |
+| :----------------- | :----- | :----------------- | :------------------------------------------------------------------- |
+| label | string | default label|
+|size | any | default size|
+|positionRelative | boolean | default position value |
 
 
 ## Contributing!
