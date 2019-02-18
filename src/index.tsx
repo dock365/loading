@@ -47,16 +47,12 @@ const loading = <P extends ILoadingProps>(
         this._toggleLoading = this._toggleLoading.bind(this);
       }
       public render() {
-        if (this.state.loading) {
-          return (
-            <div style={this.state.relative ? { position: "relative" } : {}}>
-              <SpinnerComponent label={this.state.label} size={this.state.size} />
-              <Component {...this.props} toggleLoading={this._toggleLoading} />
-            </div>
-          )
-        }
-
-        return <Component {...this.props} toggleLoading={this._toggleLoading} />
+        return (
+          <div style={this.state.relative ? { position: "relative" } : {}}>
+            {this.state.loading && <SpinnerComponent label={this.state.label} size={this.state.size} />}
+            <Component {...this.props} toggleLoading={this._toggleLoading} />
+          </div>
+        )
       }
 
       private _toggleLoading(status?: boolean, relative?: boolean, label?: string, size?: any) {
