@@ -17,14 +17,19 @@ export interface ILoadingProps {
   toggleLoading: (status?: boolean, relative?: boolean, label?: string, size?: any) => void;
 }
 
-
+export interface IProperties {
+  defaultLabel: string,
+  defaultSize?: any,
+  defaultPositionRelative: boolean,
+}
 
 const loading = <P extends ILoadingProps>(
   SpinnerComponent: React.ComponentType<ILoadingComponentProps>,
-  defaultLabel: string = "",
-  defaultSize?: any,
-  defaultPositionRelative: boolean = false
+  { defaultLabel, defaultSize, defaultPositionRelative }: IProperties,
 ) => {
+  defaultPositionRelative = defaultPositionRelative || false;
+  defaultLabel = defaultLabel || "";
+
   return (Component: React.ComponentType<P>): React.ComponentType<P> => {
 
     return class extends React.Component<P, IComponentState> {
