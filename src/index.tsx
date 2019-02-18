@@ -13,9 +13,13 @@ export interface IComponentState {
   size?: any;
 }
 
+export interface ILoadingProps {
+  toggleLoading: (status?: boolean, relative?: boolean, label?: string, size?: any) => void;
+}
 
 
-const loading = <P extends {}>(
+
+const loading = <P extends ILoadingProps>(
   SpinnerComponent: React.ComponentType<ILoadingComponentProps>,
   defaultLabel: string = "",
   defaultSize?: any,
@@ -40,7 +44,7 @@ const loading = <P extends {}>(
         if (this.state.loading) {
           return (
             <div style={this.state.relative ? { position: "relative" } : {}}>
-              <SpinnerComponent label={this.state.label}  size={this.state.size} />
+              <SpinnerComponent label={this.state.label} size={this.state.size} />
               <Component {...this.props} toggleLoading={this._toggleLoading} />
             </div>
           )
