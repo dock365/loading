@@ -18,17 +18,18 @@ export interface ILoadingProps {
 }
 
 export interface IProperties {
-  defaultLabel: string,
-  defaultSize?: any,
-  defaultPositionRelative: boolean,
+  label?: string,
+  size?: any,
+  positionRelative?: boolean,
 }
 
 const loading = <P extends ILoadingProps>(
   SpinnerComponent: React.ComponentType<ILoadingComponentProps>,
-  { defaultLabel, defaultSize, defaultPositionRelative }: IProperties,
+  { label, size, positionRelative }: IProperties,
 ) => {
-  defaultPositionRelative = defaultPositionRelative || false;
-  defaultLabel = defaultLabel || "";
+  const defaultPositionRelative = positionRelative || false;
+  const defaultLabel = label || "";
+  const defaultSize = size;
 
   return (Component: React.ComponentType<P>): React.ComponentType<P> => {
 
