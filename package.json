@@ -1,6 +1,6 @@
 {
   "name": "@dock365/loading",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Loading HOC for react",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
